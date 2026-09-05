@@ -1,0 +1,271 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Glow Salon</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf8f6;
+            color: #24201e;
+        }
+
+        header {
+            height: 64px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .menu {
+            font-size: 24px;
+        }
+
+        .hero {
+            padding: 20px;
+        }
+
+        .hero-image {
+            height: 420px;
+
+            border-radius: 24px;
+
+            background-image:
+                linear-gradient(
+                    rgba(0,0,0,0.15),
+                    rgba(0,0,0,0.35)
+                ),
+                url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: flex-end;
+
+            padding: 25px;
+        }
+
+        .hero-content {
+            color: white;
+        }
+
+        .rating {
+            font-size: 13px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 18px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .book-btn {
+            display: block;
+
+            margin: 0 20px;
+
+            padding: 17px;
+
+            background: #211d1b;
+            color: white;
+
+            text-align: center;
+
+            border-radius: 14px;
+
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .info {
+            padding: 25px 20px;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 14px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #e6e0dc;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+
+            background: #eee7e2;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info h3 {
+            font-size: 14px;
+        }
+
+        .info p {
+            margin-top: 4px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        footer {
+            margin-top: 20px;
+
+            padding: 30px 20px;
+
+            background: #211d1b;
+            color: white;
+
+            text-align: center;
+        }
+
+        footer p {
+            margin-top: 8px;
+            color: #bbb;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        GLOW.
+    </div>
+
+    <div class="menu">
+        ☰
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-image">
+
+        <div class="hero-content">
+
+            <span class="rating">
+                ⭐ 4.9 • 500+ Customers
+            </span>
+
+            <h1>
+                Look good.<br>
+                Feel amazing.
+            </h1>
+
+            <p>
+                Premium salon experience in Madurai.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BOOK APPOINTMENT -->
+
+<a href="booking.html" class="book-btn">
+    Book Appointment →
+</a>
+
+
+<section class="info">
+
+    <div class="info-row">
+
+        <div class="icon">
+            📍
+        </div>
+
+        <div>
+            <h3>Location</h3>
+            <p>Anna Nagar, Madurai</p>
+        </div>
+
+    </div>
+
+
+    <div class="info-row">
+
+        <div class="icon">
+            🕐
+        </div>
+
+        <div>
+            <h3>Opening Hours</h3>
+            <p>9:00 AM – 9:00 PM</p>
+        </div>
+
+    </div>
+
+
+    <div class="info-row">
+
+        <div class="icon">
+            📞
+        </div>
+
+        <div>
+            <h3>Call Us</h3>
+            <p>+91 98765 43210</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>GLOW. Salon</h3>
+
+    <p>
+        Your beauty, our passion.
+    </p>
+
+</footer>
+
+</body>
+
+</html>
+```
