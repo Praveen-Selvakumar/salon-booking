@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Details</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", Roboto, Arial, sans-serif;
+
+            background: #faf8f6;
+            color: #24201e;
+
+            padding-bottom: 100px;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 64px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 20px;
+
+            border-bottom: 1px solid #eee9e6;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 10;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f0ebe8;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-title {
+            margin-left: 14px;
+
+            font-size: 17px;
+
+            font-weight: 600;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 600px;
+
+            margin: auto;
+
+            padding: 24px 18px 30px;
+        }
+
+        .step {
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 1px;
+
+            color: #92715f;
+
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 25px;
+
+            line-height: 1.3;
+
+            margin-bottom: 7px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+
+            color: #777;
+
+            margin-bottom: 24px;
+        }
+
+        /* ================= BOOKING SUMMARY ================= */
+
+        .summary-card {
+            background: white;
+
+            border: 1px solid #eee8e4;
+
+            border-radius: 16px;
+
+            padding: 17px;
+
+            margin-bottom: 26px;
+        }
+
+        .summary-title {
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #777;
+
+            margin-bottom: 14px;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 8px 0;
+
+            gap: 15px;
+        }
+
+        .summary-label {
+            font-size: 13px;
+
+            color: #888;
+        }
+
+        .summary-value {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            text-align: right;
+
+            word-break: break-word;
+        }
+
+        .divider {
+            height: 1px;
+
+            background: #eee9e6;
+
+            margin: 5px 0;
+        }
+
+        /* ================= FORM ================= */
+
+        .section-title {
+            font-size: 16px;
+
+            font-weight: 600;
+
+            margin-bottom: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #b45b4d;
+        }
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            border: 1px solid #ddd6d1;
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            color: #24201e;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        input {
+            height: 52px;
+        }
+
+        textarea {
+            min-height: 110px;
+
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+
+            border-color: #92715f;
+
+            box-shadow:
+                0 0 0 3px rgba(146, 113, 95, 0.08);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #aaa;
+        }
+
+        .phone-wrapper {
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .country-code {
+
+            width: 70px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f3efec;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #555;
+
+            border: 1px solid #ddd6d1;
+        }
+
+        .phone-input {
+            flex: 1;
+        }
+
+        .helper-text {
+            font-size: 12px;
+
+            color: #999;
+
+            margin-top: 7px;
+        }
+
+        /* ================= BOTTOM ================= */
+
+        .bottom-bar {
+
+            position: fixed;
+
+            left: 0;
+            right: 0;
+
+            bottom: 0;
+
+            background: white;
+
+            border-top: 1px solid #eee9e6;
+
+            padding: 14px 18px;
+
+            z-index: 20;
+        }
+
+        .bottom-inner {
+
+            max-width: 600px;
+
+            margin: auto;
+        }
+
+        .confirm-btn {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background: #211d1b;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .confirm-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ================= ERROR ================= */
+
+        .error {
+
+            color: #b45b4d;
+
+            font-size: 12px;
+
+            margin-top: 6px;
+
+            display: none;
+        }
+
+        /* ================= DESKTOP ================= */
+
+        @media (min-width: 700px) {
+
+            .container {
+                padding-top: 35px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <button
+        class="back-btn"
+        onclick="goBack()">
+
+        ←
+
+    </button>
+
+    <div class="header-title">
+
+        Book Appointment
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <div class="step">
+
+        STEP 3 OF 4
+
+    </div>
+
+
+    <h1>
+
+        Your Details
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Enter your details to confirm your appointment.
+
+    </p>
+
+
+
+    <!-- ================= BOOKING SUMMARY ================= -->
+
+    <div class="summary-card">
+
+        <div class="summary-title">
+
+            APPOINTMENT SUMMARY
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span class="summary-label">
+                Service
+            </span>
+
+            <span
+                class="summary-value"
+                id="serviceName">
+
+                -
+
+            </span>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="summary-row">
+
+            <span class="summary-label">
+                Date
+            </span>
+
+            <span
+                class="summary-value"
+                id="bookingDate">
+
+                -
+
+            </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span class="summary-label">
+                Time
+            </span>
+
+            <span
+                class="summary-value"
+                id="bookingTime">
+
+                -
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= CUSTOMER FORM ================= -->
+
+    <div class="section-title">
+
+        Customer Information
+
+    </div>
+
+
+
+    <!-- NAME -->
+
+    <div class="form-group">
+
+        <label
+            class="form-label"
+            for="customerName">
+
+            Name <span class="required">*</span>
+
+        </label>
+
+
+        <input
+            type="text"
+            id="customerName"
+            placeholder="Enter your name"
+            autocomplete="name"
+        />
+
+
+        <div
+            class="error"
+            id="nameError">
+
+            Please enter your name.
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MOBILE -->
+
+    <div class="form-group">
+
+        <label
+            class="form-label"
+            for="mobile">
+
+            Mobile Number <span class="required">*</span>
+
+        </label>
+
+
+        <div class="phone-wrapper">
+
+            <div class="country-code">
+
+                +91
+
+            </div>
+
+
+            <input
+                class="phone-input"
+                type="tel"
+                id="mobile"
+                placeholder="Enter mobile number"
+                maxlength="10"
+                inputmode="numeric"
+                autocomplete="tel"
+            />
+
+        </div>
+
+
+        <div class="helper-text">
+
+            We may use this number to contact you about your appointment.
+
+        </div>
+
+
+        <div
+            class="error"
+            id="mobileError">
+
+            Please enter a valid 10-digit mobile number.
+
+        </div>
+
+    </div>
+
+
+
+    <!-- DETAILS -->
+
+    <div class="form-group">
+
+        <label
+            class="form-label"
+            for="details">
+
+            Details
+
+        </label>
+
+
+        <textarea
+            id="details"
+            placeholder="Anything you would like the salon to know? (Optional)"
+        ></textarea>
+
+
+        <div class="helper-text">
+
+            Example: Preferred stylist, special request, etc.
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ================= BOTTOM BUTTON ================= -->
+
+<div class="bottom-bar">
+
+    <div class="bottom-inner">
+
+        <button
+            class="confirm-btn"
+            id="confirmBtn"
+            onclick="confirmBooking()">
+
+            Confirm Booking
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       READ DATA FROM SELECT SLOT PAGE
+       ===================================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const service =
+        params.get("service");
+
+
+    const date =
+        params.get("date");
+
+
+    const time =
+        params.get("time");
+
+
+
+    /* =====================================================
+       DISPLAY BOOKING DETAILS
+       ===================================================== */
+
+    document.getElementById(
+        "serviceName"
+    ).textContent =
+        service || "-";
+
+
+    document.getElementById(
+        "bookingDate"
+    ).textContent =
+        formatDisplayDate(date);
+
+
+    document.getElementById(
+        "bookingTime"
+    ).textContent =
+        time || "-";
+
+
+
+    /* =====================================================
+       FORMAT DATE
+       ===================================================== */
+
+    function formatDisplayDate(dateString) {
+
+        if (!dateString) {
+            return "-";
+        }
+
+
+        const dateObject =
+            new Date(
+                dateString + "T00:00:00"
+            );
+
+
+        return dateObject.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       MOBILE NUMBER
+       ===================================================== */
+
+    const mobileInput =
+        document.getElementById(
+            "mobile"
+        );
+
+
+    mobileInput.addEventListener(
+        "input",
+        function () {
+
+            this.value =
+                this.value.replace(
+                    /\D/g,
+                    ""
+                );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       VALIDATION
+       ===================================================== */
+
+    function validateForm() {
+
+        const name =
+            document
+                .getElementById("customerName")
+                .value
+                .trim();
+
+
+        const mobile =
+            document
+                .getElementById("mobile")
+                .value
+                .trim();
+
+
+        let valid = true;
+
+
+
+        /* NAME */
+
+        if (name.length < 2) {
+
+            document
+                .getElementById("nameError")
+                .style.display = "block";
+
+            valid = false;
+
+        } else {
+
+            document
+                .getElementById("nameError")
+                .style.display = "none";
+
+        }
+
+
+
+        /* MOBILE */
+
+        if (!/^[6-9]\d{9}$/.test(mobile)) {
+
+            document
+                .getElementById("mobileError")
+                .style.display = "block";
+
+            valid = false;
+
+        } else {
+
+            document
+                .getElementById("mobileError")
+                .style.display = "none";
+
+        }
+
+
+        return valid;
+
+    }
+
+
+
+    /* =====================================================
+       CONFIRM BOOKING
+       ===================================================== */
+
+    function confirmBooking() {
+
+
+        /* Validate */
+
+        if (!validateForm()) {
+            return;
+        }
+
+
+        /* Get customer data */
+
+        const name =
+            document
+                .getElementById("customerName")
+                .value
+                .trim();
+
+
+        const mobile =
+            document
+                .getElementById("mobile")
+                .value
+                .trim();
+
+
+        const details =
+            document
+                .getElementById("details")
+                .value
+                .trim();
+
+
+
+        /* =================================================
+           CREATE BOOKING OBJECT
+           ================================================= */
+
+        const booking = {
+
+            service: service || "",
+
+            date: date || "",
+
+            time: time || "",
+
+            customerName: name,
+
+            mobile: mobile,
+
+            details: details,
+
+            bookingId:
+                "SAL" +
+                Date.now()
+                    .toString()
+                    .slice(-6)
+
+        };
+
+
+
+        /* =================================================
+           STORE BOOKING
+           ================================================= */
+
+        localStorage.setItem(
+            "latestBooking",
+            JSON.stringify(booking)
+        );
+
+
+
+        /* =================================================
+           NAVIGATE TO NEXT PAGE
+           
+           confirm_booking.html
+                    ↓
+           booking_success.html
+           ================================================= */
+
+        window.location.href =
+            "booking_success.html";
+
+    }
+
+
+
+    /* =====================================================
+       BACK NAVIGATION
+       ===================================================== */
+
+    function goBack() {
+
+        window.history.back();
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
+

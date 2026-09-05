@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Date & Time</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #222;
+            padding-bottom: 100px;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: white;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .back-btn {
+            border: none;
+            background: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* STEP */
+
+        .step {
+            padding: 18px 20px 5px;
+            font-size: 12px;
+            color: #777;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* SERVICE */
+
+        .selected-service {
+            padding: 10px 20px 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .selected-service span {
+            font-weight: bold;
+            color: #222;
+        }
+
+        /* SECTION */
+
+        .section {
+            background: white;
+            margin-top: 10px;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* DATE */
+
+        .date-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .date-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-card {
+            min-width: 68px;
+            height: 78px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .date-card .day {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 7px;
+        }
+
+        .date-card .date {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .date-card .month {
+            font-size: 11px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        .date-card.selected {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+
+        .date-card.selected .day,
+        .date-card.selected .month {
+            color: #ddd;
+        }
+
+        .date-card.disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        /* TIME */
+
+        .time-info {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 18px;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-slot {
+            padding: 13px 5px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .time-slot:hover {
+            border-color: #111;
+        }
+
+        .time-slot.selected {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+
+        .time-slot.disabled {
+            background: #eee;
+            color: #aaa;
+            text-decoration: line-through;
+            cursor: not-allowed;
+        }
+
+        /* BOTTOM BUTTON */
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            border-top: 1px solid #ddd;
+            z-index: 100;
+        }
+
+        .next-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .next-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* DESKTOP */
+
+        @media (min-width: 700px) {
+
+            body {
+                max-width: 600px;
+                margin: auto;
+                background: #f3f3f3;
+            }
+
+            .bottom-bar {
+                max-width: 600px;
+                margin: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <button
+        class="back-btn"
+        onclick="history.back()">
+
+        ←
+
+    </button>
+
+    <div class="header-title">
+
+        Choose Date & Time
+
+    </div>
+
+</div>
+
+
+
+<!-- STEP -->
+
+<div class="step">
+
+    STEP 2 OF 4
+
+</div>
+
+
+
+<!-- SELECTED SERVICE -->
+
+<div class="selected-service">
+
+    Service:
+
+    <span id="serviceName">
+
+        Loading...
+
+    </span>
+
+</div>
+
+
+
+<!-- DATE SECTION -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        Select Date
+
+    </div>
+
+
+    <div
+        class="date-container"
+        id="dateContainer">
+
+    </div>
+
+</div>
+
+
+
+<!-- TIME SECTION -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        Select Time
+
+    </div>
+
+
+    <div class="time-info">
+
+        Opening hours: 9:00 AM – 8:00 PM
+
+    </div>
+
+
+    <div
+        class="time-grid"
+        id="timeGrid">
+
+    </div>
+
+</div>
+
+
+
+<!-- BOTTOM -->
+
+<div class="bottom-bar">
+
+    <button
+        class="next-btn"
+        id="nextButton"
+        disabled
+        onclick="goNext()">
+
+        Choose a time slot
+
+    </button>
+
+</div>
+
+
+
+<script>
+
+
+    /*
+     * SALON SETTINGS
+     */
+
+    const OPENING_HOUR = 9;
+
+    const CLOSING_HOUR = 20;
+
+    // Slot interval in minutes
+    const SLOT_INTERVAL = 30;
+
+
+
+    /*
+     * VARIABLES
+     */
+
+    let selectedDate = null;
+
+    let selectedTime = null;
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const service =
+        params.get("service") ||
+        "Selected Service";
+
+
+
+    /*
+     * SHOW SERVICE
+     */
+
+    document.getElementById(
+        "serviceName"
+    ).textContent = service;
+
+
+
+    /*
+     * GENERATE DATES
+     */
+
+    function generateDates() {
+
+        const container =
+            document.getElementById(
+                "dateContainer"
+            );
+
+
+        container.innerHTML = "";
+
+
+        const today = new Date();
+
+
+        /*
+         * Show next 30 days
+         */
+
+        for (
+            let i = 0;
+            i < 30;
+            i++
+        ) {
+
+            const date =
+                new Date(today);
+
+
+            date.setDate(
+                today.getDate() + i
+            );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "date-card";
+
+
+            /*
+             * Date information
+             */
+
+            const day =
+                date.toLocaleDateString(
+                    "en-US",
+                    {
+                        weekday: "short"
+                    }
+                );
+
+
+            const dateNumber =
+                date.getDate();
+
+
+            const month =
+                date.toLocaleDateString(
+                    "en-US",
+                    {
+                        month: "short"
+                    }
+                );
+
+
+            card.innerHTML = `
+
+                <div class="day">
+                    ${day}
+                </div>
+
+                <div class="date">
+                    ${dateNumber}
+                </div>
+
+                <div class="month">
+                    ${month}
+                </div>
+
+            `;
+
+
+
+            /*
+             * Date ID
+             */
+
+            const dateString =
+                formatDate(date);
+
+
+            card.dataset.date =
+                dateString;
+
+
+
+            /*
+             * Click
+             */
+
+            card.onclick = function () {
+
+                selectDate(
+                    dateString,
+                    card
+                );
+
+            };
+
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+
+
+
+        /*
+         * Automatically select today
+         */
+
+        const firstCard =
+            container.querySelector(
+                ".date-card"
+            );
+
+
+        if (firstCard) {
+
+            selectDate(
+                firstCard.dataset.date,
+                firstCard
+            );
+
+        }
+
+    }
+
+
+
+    /*
+     * FORMAT DATE
+     */
+
+    function formatDate(date) {
+
+        const year =
+            date.getFullYear();
+
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(2, "0");
+
+
+        return `${year}-${month}-${day}`;
+
+    }
+
+
+
+    /*
+     * SELECT DATE
+     */
+
+    function selectDate(
+        date,
+        element
+    ) {
+
+        selectedDate =
+            date;
+
+
+        selectedTime =
+            null;
+
+
+
+        /*
+         * Remove previous selection
+         */
+
+        document
+            .querySelectorAll(
+                ".date-card"
+            )
+            .forEach(card => {
+
+                card.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+
+        /*
+         * Select current date
+         */
+
+        element.classList.add(
+            "selected"
+        );
+
+
+
+        /*
+         * Generate time slots
+         */
+
+        generateTimeSlots();
+
+
+        updateNextButton();
+
+    }
+
+
+
+    /*
+     * GENERATE TIME SLOTS
+     */
+
+    function generateTimeSlots() {
+
+        const grid =
+            document.getElementById(
+                "timeGrid"
+            );
+
+
+        grid.innerHTML = "";
+
+
+
+        const openingMinutes =
+            OPENING_HOUR * 60;
+
+
+        const closingMinutes =
+            CLOSING_HOUR * 60;
+
+
+
+        for (
+            let minutes = openingMinutes;
+            minutes < closingMinutes;
+            minutes += SLOT_INTERVAL
+        ) {
+
+            const hour =
+                Math.floor(
+                    minutes / 60
+                );
+
+
+            const minute =
+                minutes % 60;
+
+
+
+            /*
+             * Convert to AM / PM
+             */
+
+            const timeText =
+                formatTime(
+                    hour,
+                    minute
+                );
+
+
+
+            const slot =
+                document.createElement(
+                    "div"
+                );
+
+
+            slot.className =
+                "time-slot";
+
+
+            slot.textContent =
+                timeText;
+
+
+
+            slot.dataset.time =
+                timeText;
+
+
+
+            /*
+             * Demo unavailable slots
+             */
+
+            if (
+                isUnavailable(timeText)
+            ) {
+
+                slot.classList.add(
+                    "disabled"
+                );
+
+            } else {
+
+                slot.onclick =
+                    function () {
+
+                        selectTime(
+                            timeText,
+                            slot
+                        );
+
+                    };
+
+            }
+
+
+
+            grid.appendChild(
+                slot
+            );
+
+        }
+
+    }
+
+
+
+    /*
+     * FORMAT TIME
+     */
+
+    function formatTime(
+        hour,
+        minute
+    ) {
+
+        const period =
+            hour >= 12
+                ? "PM"
+                : "AM";
+
+
+        let displayHour =
+            hour % 12;
+
+
+        if (
+            displayHour === 0
+        ) {
+
+            displayHour = 12;
+
+        }
+
+
+        const displayMinute =
+            String(minute)
+                .padStart(2, "0");
+
+
+        return `${displayHour}:${displayMinute} ${period}`;
+
+    }
+
+
+
+    /*
+     * DEMO UNAVAILABLE SLOTS
+     *
+     * Later this can come
+     * from Firestore.
+     */
+
+    function isUnavailable(time) {
+
+        const unavailable = [
+
+            "10:00 AM",
+
+            "1:30 PM",
+
+            "4:00 PM",
+
+            "6:30 PM"
+
+        ];
+
+
+        return unavailable.includes(
+            time
+        );
+
+    }
+
+
+
+    /*
+     * SELECT TIME
+     */
+
+    function selectTime(
+        time,
+        element
+    ) {
+
+        selectedTime =
+            time;
+
+
+
+        /*
+         * Remove old selection
+         */
+
+        document
+            .querySelectorAll(
+                ".time-slot"
+            )
+            .forEach(slot => {
+
+                slot.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+
+        /*
+         * Select current slot
+         */
+
+        element.classList.add(
+            "selected"
+        );
+
+
+        updateNextButton();
+
+    }
+
+
+
+    /*
+     * UPDATE BUTTON
+     */
+
+    function updateNextButton() {
+
+        const button =
+            document.getElementById(
+                "nextButton"
+            );
+
+
+        if (
+            selectedDate &&
+            selectedTime
+        ) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Continue →";
+
+        } else {
+
+            button.disabled = true;
+
+            button.textContent =
+                "Choose a time slot";
+
+        }
+
+    }
+
+
+
+    /*
+     * NEXT PAGE
+     */
+
+    function goNext() {
+
+        if (
+            !selectedDate ||
+            !selectedTime
+        ) {
+
+            return;
+
+        }
+
+
+
+        /*
+         * Move to confirm_booking.html
+         *
+         * Passing:
+         * - service
+         * - date
+         * - time
+         */
+
+        const url =
+            "confirm_booking.html" +
+
+            "?service=" +
+            encodeURIComponent(
+                service
+            ) +
+
+            "&date=" +
+            encodeURIComponent(
+                selectedDate
+            ) +
+
+            "&time=" +
+            encodeURIComponent(
+                selectedTime
+            );
+
+
+
+        window.location.href =
+            url;
+
+    }
+
+
+
+    /*
+     * START
+     */
+
+    generateDates();
+
+</script>
+
+
+</body>
+
+</html>
+

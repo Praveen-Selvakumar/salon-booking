@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Select Service</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: #faf8f6;
+
+            color: #24201e;
+
+            min-height: 100vh;
+        }
+
+
+        /* HEADER */
+
+        header {
+
+            height: 64px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 0 20px;
+
+            border-bottom: 1px solid #eee8e4;
+        }
+
+        .back {
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f0ebe8;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        header h2 {
+
+            font-size: 18px;
+
+        }
+
+
+        /* CONTENT */
+
+        .content {
+
+            padding: 25px 20px 110px;
+
+        }
+
+        .step {
+
+            font-size: 13px;
+
+            color: #92715f;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+        .title {
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+
+        }
+
+        .subtitle {
+
+            font-size: 14px;
+
+            color: #777;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* SERVICES */
+
+        .service-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .service {
+
+            background: white;
+
+            border: 1px solid #e7e0dc;
+
+            border-radius: 16px;
+
+            padding: 17px;
+
+            display: flex;
+
+            align-items: center;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .service:hover {
+
+            border-color: #92715f;
+
+        }
+
+
+        .service input {
+
+            width: 20px;
+
+            height: 20px;
+
+            accent-color: #211d1b;
+
+            margin-right: 15px;
+
+        }
+
+
+        .service-info {
+
+            flex: 1;
+
+        }
+
+
+        .service-name {
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        .service-description {
+
+            font-size: 12px;
+
+            color: #888;
+
+            margin-top: 5px;
+
+        }
+
+
+        .service-price {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* BOTTOM BUTTON */
+
+        .bottom-bar {
+
+            position: fixed;
+
+            bottom: 0;
+
+            left: 0;
+
+            right: 0;
+
+            background: white;
+
+            padding: 14px 20px;
+
+            border-top: 1px solid #e5dfdb;
+
+        }
+
+
+        .next-btn {
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background: #211d1b;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .next-btn:active {
+
+            transform: scale(0.98);
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <button
+        class="back"
+        onclick="history.back()">
+
+        ←
+
+    </button>
+
+    <h2>
+        Book Appointment
+    </h2>
+
+</header>
+
+
+<!-- CONTENT -->
+
+<main class="content">
+
+    <div class="step">
+        STEP 1 OF 4
+    </div>
+
+
+    <h1 class="title">
+        Select a service
+    </h1>
+
+
+    <p class="subtitle">
+        What would you like to book today?
+    </p>
+
+
+    <div class="service-list">
+
+
+        <!-- SERVICE 1 -->
+
+        <label class="service">
+
+            <input
+                type="radio"
+                name="service"
+                value="Hair Cut">
+
+            <div class="service-info">
+
+                <div class="service-name">
+                    Hair Cut
+                </div>
+
+                <div class="service-description">
+                    Professional haircut & styling
+                </div>
+
+            </div>
+
+            <div class="service-price">
+                ₹250
+            </div>
+
+        </label>
+
+
+        <!-- SERVICE 2 -->
+
+        <label class="service">
+
+            <input
+                type="radio"
+                name="service"
+                value="Hair Spa">
+
+            <div class="service-info">
+
+                <div class="service-name">
+                    Hair Spa
+                </div>
+
+                <div class="service-description">
+                    Relaxing hair treatment
+                </div>
+
+            </div>
+
+            <div class="service-price">
+                ₹600
+            </div>
+
+        </label>
+
+
+        <!-- SERVICE 3 -->
+
+        <label class="service">
+
+            <input
+                type="radio"
+                name="service"
+                value="Facial">
+
+            <div class="service-info">
+
+                <div class="service-name">
+                    Facial
+                </div>
+
+                <div class="service-description">
+                    Deep cleansing & glow treatment
+                </div>
+
+            </div>
+
+            <div class="service-price">
+                ₹800
+            </div>
+
+        </label>
+
+
+        <!-- SERVICE 4 -->
+
+        <label class="service">
+
+            <input
+                type="radio"
+                name="service"
+                value="Hair Styling">
+
+            <div class="service-info">
+
+                <div class="service-name">
+                    Hair Styling
+                </div>
+
+                <div class="service-description">
+                    Modern styling for any occasion
+                </div>
+
+            </div>
+
+            <div class="service-price">
+                ₹450
+            </div>
+
+        </label>
+
+
+        <!-- SERVICE 5 -->
+
+        <label class="service">
+
+            <input
+                type="radio"
+                name="service"
+                value="Beard Trim">
+
+            <div class="service-info">
+
+                <div class="service-name">
+                    Beard Trim
+                </div>
+
+                <div class="service-description">
+                    Professional beard grooming
+                </div>
+
+            </div>
+
+            <div class="service-price">
+                ₹150
+            </div>
+
+        </label>
+
+    </div>
+
+</main>
+
+
+<!-- BOTTOM -->
+
+<div class="bottom-bar">
+
+    <button
+        class="next-btn"
+        onclick="goNext()">
+
+        Next →
+
+    </button>
+
+</div>
+
+
+<script>
+
+    function goNext() {
+
+        const selected =
+            document.querySelector(
+                'input[name="service"]:checked'
+            );
+
+
+        if (!selected) {
+
+            alert("Please select a service");
+
+            return;
+
+        }
+
+
+        // For now, move to the next page
+
+        window.location.href =
+            "select_slot.html?service="
+            + encodeURIComponent(selected.value);
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+
